@@ -13,4 +13,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    user = User.find(params[:id])
+    render json: user
+  end
+  
+  def update
+    user = User.find(params[:id])
+    user.handle = params[handle] || user.handle
+    user.email = params[email] || user.email
+    user.image_url = params[image_url] || user.image_url
+    user.stream_url = params[stream_url] || user.stream_url
+    user.bio = params[bio] || user.bio
+    user.game_id = params[game_id] || user.game_id
+    if product.save
+      render json: product
+    else
+      render json: product.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
 end

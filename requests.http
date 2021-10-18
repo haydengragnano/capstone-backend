@@ -1,5 +1,7 @@
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzQ0Mzg2NjN9.3X56edDH75XWlmtTU_4_Z1-SdHZFeFnco5uG5zj4BA4
+@hostname = http://localhost:3000
 ### Users create (signup)
-  POST http://localhost:3000/users
+  POST {{hostname}}/users
   Content-Type: application/json
 
   {
@@ -10,12 +12,27 @@
   }
 
 
-  ### Sessions create login
+### Sessions create login
 
-  POST http://localhost:3000/sessions
+  POST {{hostname}}/sessions
   Content-Type: application/json
 
   {
     "email": "moo@gmail.com",
     "password": "password"
   }
+
+### USERS SHOW
+GET {{hostname}}/users/1
+
+### USERS UPDATE
+PATCH {{hostname}}/users/1
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "image_url": "test",
+  "stream_url": "moo.ttv",
+  "bio": "im moo an evil wierd cat",
+  "game_id": 3,
+}
