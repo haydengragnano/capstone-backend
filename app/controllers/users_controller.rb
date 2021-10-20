@@ -20,17 +20,23 @@ class UsersController < ApplicationController
   
   def update
     user = User.find(params[:id])
-    user.handle = params[handle] || user.handle
-    user.email = params[email] || user.email
-    user.image_url = params[image_url] || user.image_url
-    user.stream_url = params[stream_url] || user.stream_url
-    user.bio = params[bio] || user.bio
-    user.game_id = params[game_id] || user.game_id
-    if product.save
-      render json: product
+    user.handle = params[:handle] || user.handle
+    user.email = params[:email] || user.email
+    user.image_url = params[:image_url] || user.image_url
+    user.stream_url = params[:stream_url] || user.stream_url
+    user.bio = params[:bio] || user.bio
+    user.game_id = params[:game_id] || user.game_id
+    if user.save
+      render json: user
     else
-      render json: product.errors.full_messages, status: :unprocessable_entity
+      render json: user.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    render json: {message: "we'll poor one out for you"}
   end
 
 end

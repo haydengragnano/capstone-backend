@@ -1,12 +1,12 @@
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzQ0Mzg2NjN9.3X56edDH75XWlmtTU_4_Z1-SdHZFeFnco5uG5zj4BA4
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzQ4NTUxNzB9.2lvsiuo1YHXbFcGq-2r35ZSs-wZX8392uBZnAmr-Rks
 @hostname = http://localhost:3000
 ### Users create (signup)
   POST {{hostname}}/users
   Content-Type: application/json
 
   {
-    "handle": "forrest",
-    "email": "forrest@gmail.com",
+    "handle": "tom",
+    "email": "tom@gmail.com",
     "password": "password",
     "password_confirmation": "password"
   }
@@ -34,5 +34,25 @@ Authorization: Bearer {{jwt}}
   "image_url": "test",
   "stream_url": "moo.ttv",
   "bio": "im moo an evil wierd cat",
-  "game_id": 3,
+  "game_id": 3
 }
+
+### USER DESTROY
+
+DELETE {{hostname}}/users/3
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+
+### TAGS INDEX
+GET {{hostname}}/tags
+
+### GAMES INDEX
+GET {{hostname}}/games
+
+
+
+### GAMES SHOW
+GET {{hostname}}/games/2
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
