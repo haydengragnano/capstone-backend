@@ -1,12 +1,13 @@
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzQ4NTUxNzB9.2lvsiuo1YHXbFcGq-2r35ZSs-wZX8392uBZnAmr-Rks
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHAiOjE2MzUwMTI3MTZ9.a3UvDBhqMdvEwqrR3BymEa9POHanHBpXiNI7EaEPUq4
+
 @hostname = http://localhost:3000
 ### Users create (signup)
   POST {{hostname}}/users
   Content-Type: application/json
 
   {
-    "handle": "tom",
-    "email": "tom@gmail.com",
+    "handle": "ryan",
+    "email": "ryan@gmail.com",
     "password": "password",
     "password_confirmation": "password"
   }
@@ -18,28 +19,32 @@
   Content-Type: application/json
 
   {
-    "email": "moo@gmail.com",
+    "email": "ryan@gmail.com",
     "password": "password"
   }
 
 ### USERS SHOW
-GET {{hostname}}/users/1
+GET {{hostname}}/users/6
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
 
 ### USERS UPDATE
-PATCH {{hostname}}/users/1
+PATCH {{hostname}}/users/6
 Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
   "image_url": "test",
-  "stream_url": "moo.ttv",
-  "bio": "im moo an evil wierd cat",
-  "game_id": 3
+  "stream_url": "ryan.ttv",
+  "bio": "im a climber man",
+  "game_id": 6,
+  "tag_ids": [2, 10, 16]
 }
 
 ### USER DESTROY
 
-DELETE {{hostname}}/users/3
+DELETE {{hostname}}/users/4
 Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
@@ -53,6 +58,6 @@ GET {{hostname}}/games
 
 
 ### GAMES SHOW
-GET {{hostname}}/games/2
+GET {{hostname}}/games/6
 Content-Type: application/json
 Authorization: Bearer {{jwt}}

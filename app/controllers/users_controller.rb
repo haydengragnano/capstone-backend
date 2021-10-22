@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :authenticate_user, except: [:create, :show]
+
   def create
     user = User.new(
       handle: params[:handle],
@@ -7,7 +10,8 @@ class UsersController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
     if user.save
-      render json: { message: "User created successfully" }, status: :created
+      render json: user, 
+      status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
@@ -15,7 +19,7 @@ class UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    render json: user
+    render json: user 
   end
   
   def update
@@ -27,6 +31,15 @@ class UsersController < ApplicationController
     user.bio = params[:bio] || user.bio
     user.game_id = params[:game_id] || user.game_id
     if user.save
+      # remove old tags
+      current_user.user_tags.destroy_all
+      # add new tags
+      params[:tag_ids].each do |tag_id|
+        UserTag.create(
+          user_id: current_user.id, 
+          tag_id: tag_id
+        )
+      end
       render json: user
     else
       render json: user.errors.full_messages, status: :unprocessable_entity
@@ -36,7 +49,7 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.destroy
-    render json: {message: "we'll poor one out for you"}
+    render json: {message: "we'll pour one out for you"}
   end
 
 end
