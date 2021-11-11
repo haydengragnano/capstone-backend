@@ -1,4 +1,4 @@
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHAiOjE2MzUwMTI3MTZ9.a3UvDBhqMdvEwqrR3BymEa9POHanHBpXiNI7EaEPUq4
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzU1NDYwNzZ9.kyRQAm_nNIUDMNy4AkhcXuRrkm_Dw3QkeD4vmLA3LSc
 
 @hostname = http://localhost:3000
 ### Users create (signup)
@@ -19,26 +19,22 @@
   Content-Type: application/json
 
   {
-    "email": "ryan@gmail.com",
+    "email": "moo@gmail.com",
     "password": "password"
   }
 
 ### USERS SHOW
-GET {{hostname}}/users/6
+GET {{hostname}}/users/1
 Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 
 ### USERS UPDATE
-PATCH {{hostname}}/users/6
+PATCH {{hostname}}/users/1
 Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-  "image_url": "test",
-  "stream_url": "ryan.ttv",
-  "bio": "im a climber man",
-  "game_id": 6,
   "tag_ids": [2, 10, 16]
 }
 
